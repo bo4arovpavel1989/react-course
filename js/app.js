@@ -14,6 +14,12 @@ var my_news = [
 ];
 
 var News = React.createClass({
+  propTypes:{
+	  data:React.PropTypes.shape({
+		  author:React.PropTypes.string.isRequired,
+		  text:React.PropTypes.string.isRequired
+	  })
+  },
   render: function() {
 	var data = this.props.data;
 	var newsTemplate;
