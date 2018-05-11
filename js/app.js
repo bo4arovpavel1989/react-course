@@ -17,6 +17,11 @@ var my_news = [
 ];
 
 var News = React.createClass({
+	getInitialState:function(){
+		return {
+			counter:0
+		}
+	},
   render: function() {
 	var data = this.props.data;
 	var newsTemplate;
@@ -63,7 +68,7 @@ var Article = React.createClass({
         text = this.props.data.text,
 		bigText=this.props.data.bigText,
 		visible=this.state.visible;
-
+		
 		return (
 		  <div className="article">
 			<p className="news__author">{author}:</p>
@@ -75,12 +80,41 @@ var Article = React.createClass({
 	}	
 })		
 
+var TestInput = React.createClass({
+	getInitialState:function(){
+		return {
+			myValue:''
+		}
+	},
+	onChangeHandler:function(e){
+		this.setState({myValue:e.target.value})
+	},
+	onBtnClickHandler:function(){		
+		console.log(this.refs);
+		 alert(ReactDOM.findDOMNode(this.refs.myTestInput).value);
+	},
+	render:function(){
+		return (
+		<div>
+			<input 
+				className="test-input"
+				defaultValue=''
+				placeholder='введите значение'
+				ref='myTestInput'
+			/>
+			<button onClick={this.onBtnClickHandler}>Показать alert</button>
+		</div>	
+		)
+	}
+})
+
 
 var App = React.createClass({
   render: function() {
     return (
       <div className="app">
         <h3>Новости</h3>
+		<TestInput /> 
         <News data={my_news}/>
       </div>
     );
